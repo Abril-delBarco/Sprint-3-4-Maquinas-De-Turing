@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const logger = require("./middlewares/logger");
-const notFound = require("./middlewares/notfound");
+const notFound = require("./middlewares/notFound");
 const errorHandler = require("./middlewares/errorHandler");
 const productosRouter = require("./routes/productos.routes");
 
