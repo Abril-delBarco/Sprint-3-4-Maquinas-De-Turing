@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getProductoPorId } from "../services/api";
+import "./ProductDetail.css";
 
 function ProductDetail({ id, onBack, onAddToCart }) {
   const [producto, setProducto] = useState(null);
@@ -49,7 +50,7 @@ function ProductDetail({ id, onBack, onAddToCart }) {
       <div className="detalle-producto__info">
         <button
           type="button"
-          className="enlace-detalle"
+          className="detalle-volver"
           onClick={onBack}
         >
           &larr; Volver al catálogo
