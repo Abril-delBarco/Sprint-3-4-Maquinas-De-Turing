@@ -18,7 +18,7 @@ function ProductList({ onSelect, onAddToCart }) {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <section className="product-list">
+    <section className="grilla-productos">
       {productos.map((p) => (
         <ProductCard
           key={p.id}
