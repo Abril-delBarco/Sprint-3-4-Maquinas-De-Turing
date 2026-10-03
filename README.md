@@ -146,7 +146,8 @@ Sprint-3-4-Maquinas-De-Turing/
 │       ├── services/
 │       │   └── api.js                # Todas las llamadas a la API
 │       └── components/
-│           ├── Navbar.jsx            # Marca + contador del carrito
+│           ├── Navbar.jsx            # Marca, navegación y acceso al carrito
+│           ├── MiniCarrito.jsx       # Panel desplegable con los items y el total
 │           ├── Footer.jsx            # Datos de contacto
 │           ├── ProductList.jsx       # Fetch del listado, estados de carga y error
 │           ├── ProductCard.jsx       # Tarjeta individual
