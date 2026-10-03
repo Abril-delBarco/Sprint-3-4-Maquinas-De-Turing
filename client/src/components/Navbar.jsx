@@ -1,14 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import MiniCarrito from "./MiniCarrito";
 
-export default function Navbar({ cartCount }) {
+export default function Navbar({ cartCount, carrito = [] }) {
 
   const [seccionActiva, setSeccionActiva] = useState("inicio");
+  const [carritoAbierto, setCarritoAbierto] = useState(false);
+  const carritoRef = useRef(null);
+
+  // El panel se cierra al clickear fuera. Sin esto queda abierto para siempre
+  // y tapa el contenido, porque no hay ningun overlay que lo cubra.
+  useEffect(() => {
+    if (!carritoAbierto) return;
+
+    const alClickearFuera = (e) => {
+      if (carritoRef.current && !carritoRef.current.contains(e.target)) {
+        setCarritoAbierto(false);
+      }
+    };
+
+    document.addEventListener("mousedown", alClickearFuera);
+    return () => document.removeEventListener("mousedown", alClickearFuera);
+  }, [carritoAbierto]);
 
   return (
     <header className="encabezado">
       <div className="contenedor encabezado__barra">
-        <a 
-          href="#inicio" 
+        <a
+          href="#inicio"
           className="encabezado__marca"
           onClick={() => setSeccionActiva("inicio")}
         >
@@ -19,8 +37,8 @@ export default function Navbar({ cartCount }) {
         <nav className="nav-principal" id="nav-principal">
           <ul className="nav-principal__lista">
             <li>
-              <a 
-                href="#inicio" 
+              <a
+                href="#inicio"
                 aria-current={seccionActiva === "inicio" ? "page" : undefined}
                 onClick={() => setSeccionActiva("inicio")}
               >
@@ -28,7 +46,7 @@ export default function Navbar({ cartCount }) {
               </a>
             </li>
             <li>
-              <a 
+              <a
                 href="#coleccion"
                 aria-current={seccionActiva === "coleccion" ? "page" : undefined}
                 onClick={() => setSeccionActiva("coleccion")}
@@ -37,7 +55,7 @@ export default function Navbar({ cartCount }) {
               </a>
             </li>
             <li>
-              <a 
+              <a
                 href="#contacto"
                 aria-current={seccionActiva === "contacto" ? "page" : undefined}
                 onClick={() => setSeccionActiva("contacto")}
@@ -49,12 +67,14 @@ export default function Navbar({ cartCount }) {
         </nav>
 
         <div className="encabezado__acciones">
-          <div className="carrito-wrapper">
+          <div className="carrito-wrapper" ref={carritoRef}>
             <button
               className="boton-carrito"
               id="boton-carrito"
               type="button"
               aria-label="Ver carrito"
+              aria-expanded={carritoAbierto}
+              onClick={() => setCarritoAbierto((abierto) => !abierto)}
             >
               <img
                 src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"
@@ -67,6 +87,8 @@ export default function Navbar({ cartCount }) {
                 </span>
               )}
             </button>
+
+            <MiniCarrito carrito={carrito} abierto={carritoAbierto} />
           </div>
         </div>
       </div>
