@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getProductos } from "..client/src/services/api.js";
+import { getProductos } from "../services/api";
 import ProductCard from "./ProductCard";
 
 function ProductList({ onSelect, onAddToCart }) {
