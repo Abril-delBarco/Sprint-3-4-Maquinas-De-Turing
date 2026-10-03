@@ -5,7 +5,15 @@ export default function Navbar({ cartCount, carrito = [] }) {
 
   const [seccionActiva, setSeccionActiva] = useState("inicio");
   const [carritoAbierto, setCarritoAbierto] = useState(false);
+  const [menuAbierto, setMenuAbierto] = useState(false);
   const carritoRef = useRef(null);
+
+  // En mobile el CSS deja la navegacion colapsada hasta que aparece
+  // .nav--abierto, asi que al elegir una seccion hay que volver a cerrarla.
+  const irASeccion = (seccion) => {
+    setSeccionActiva(seccion);
+    setMenuAbierto(false);
+  };
 
   // El panel se cierra al clickear fuera. Sin esto queda abierto para siempre
   // y tapa el contenido, porque no hay ningun overlay que lo cubra.
@@ -28,19 +36,22 @@ export default function Navbar({ cartCount, carrito = [] }) {
         <a
           href="#inicio"
           className="encabezado__marca"
-          onClick={() => setSeccionActiva("inicio")}
+          onClick={() => irASeccion("inicio")}
         >
           <img src="/assets/logo.svg" alt="Logo Hermanos Jota" />
           <span>Hermanos Jota</span>
         </a>
 
-        <nav className="nav-principal" id="nav-principal">
+        <nav
+          className={`nav-principal${menuAbierto ? " nav--abierto" : ""}`}
+          id="nav-principal"
+        >
           <ul className="nav-principal__lista">
             <li>
               <a
                 href="#inicio"
                 aria-current={seccionActiva === "inicio" ? "page" : undefined}
-                onClick={() => setSeccionActiva("inicio")}
+                onClick={() => irASeccion("inicio")}
               >
                 Inicio
               </a>
@@ -49,7 +60,7 @@ export default function Navbar({ cartCount, carrito = [] }) {
               <a
                 href="#coleccion"
                 aria-current={seccionActiva === "coleccion" ? "page" : undefined}
-                onClick={() => setSeccionActiva("coleccion")}
+                onClick={() => irASeccion("coleccion")}
               >
                 Colección
               </a>
@@ -58,7 +69,7 @@ export default function Navbar({ cartCount, carrito = [] }) {
               <a
                 href="#contacto"
                 aria-current={seccionActiva === "contacto" ? "page" : undefined}
-                onClick={() => setSeccionActiva("contacto")}
+                onClick={() => irASeccion("contacto")}
               >
                 Contacto
               </a>
@@ -90,6 +101,19 @@ export default function Navbar({ cartCount, carrito = [] }) {
 
             <MiniCarrito carrito={carrito} abierto={carritoAbierto} />
           </div>
+
+          <button
+            className="boton-menu"
+            type="button"
+            aria-label="Abrir menu"
+            aria-expanded={menuAbierto}
+            aria-controls="nav-principal"
+            onClick={() => setMenuAbierto((abierto) => !abierto)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
         </div>
       </div>
     </header>
