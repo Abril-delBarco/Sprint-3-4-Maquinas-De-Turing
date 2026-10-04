@@ -48,7 +48,7 @@ export default function App() {
 
               <div className="hero__imagen">
                 <img
-                  src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&auto=format&fit=crop&q=80"
+                  src="/assets/sofa-patagonia.png"
                   alt="Sofá de tres cuerpos tapizado en lino, de la colección Hermanos Jota"
                 />
               </div>
@@ -125,8 +125,8 @@ export default function App() {
               <div className="artesania__grid">
                 <div className="artesania__panel">
                   <img
-                    src="https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=1200&auto=format&fit=crop&q=80"
-                    alt="Mesa de comedor de nogal macizo terminada en el taller"
+                    src="/assets/aparador-uspallata.png"
+                    alt="Aparador de madera recuperada en el taller"
                   />
                   <span>Cada pieza pasa por una sola mesa de trabajo.</span>
                 </div>
