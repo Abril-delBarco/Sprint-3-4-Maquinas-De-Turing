@@ -8,6 +8,7 @@ function ProductDetail({ id, onBack, onAddToCart }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setCargando(true);
     setError(null);
 
@@ -42,7 +43,17 @@ function ProductDetail({ id, onBack, onAddToCart }) {
   }
 
   return (
-    <article className="detalle-producto">
+    <div>
+      <button
+        type="button"
+        className="detalle-volver"
+        style={{ marginBottom: "1.25rem" }}
+        onClick={onBack}
+      >
+        &larr; Volver al catálogo
+      </button>
+
+      <article className="detalle-producto">
       <div className="detalle-producto__imagen">
         <img src={producto.imagen} alt={producto.nombre} />
       </div>
@@ -91,6 +102,7 @@ function ProductDetail({ id, onBack, onAddToCart }) {
         </div>
       </div>
     </article>
+    </div>
   );
 }
 

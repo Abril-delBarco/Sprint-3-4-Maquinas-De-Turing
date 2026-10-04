@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import MiniCarrito from "./MiniCarrito";
 
-export default function Navbar({ cartCount, carrito = [] }) {
+export default function Navbar({ cartCount, carrito = [], onNavigate }) {
 
   const [seccionActiva, setSeccionActiva] = useState("inicio");
   const [carritoAbierto, setCarritoAbierto] = useState(false);
@@ -13,6 +13,9 @@ export default function Navbar({ cartCount, carrito = [] }) {
   const irASeccion = (seccion) => {
     setSeccionActiva(seccion);
     setMenuAbierto(false);
+    if (onNavigate) {
+      onNavigate(seccion);
+    }
   };
 
   // El panel se cierra al clickear fuera. Sin esto queda abierto para siempre

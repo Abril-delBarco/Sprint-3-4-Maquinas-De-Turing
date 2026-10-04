@@ -15,10 +15,27 @@ export default function App() {
     setCarrito((prevCarrito) => [...prevCarrito, producto]);
   };
 
+  const seleccionarProducto = (id) => {
+    setProductoSeleccionado(id);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const volverAlCatalogo = (seccion = "coleccion") => {
+    setProductoSeleccionado(null);
+    setTimeout(() => {
+      const el = document.getElementById(seccion);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }, 50);
+  };
+
   return (
     <>
 
-      <Navbar cartCount={carrito.length} carrito={carrito} />
+      <Navbar cartCount={carrito.length} carrito={carrito} onNavigate={volverAlCatalogo} />
 
       {/* main no lleva .contenedor: cada seccion pone el suyo, asi la franja
           de valores puede ocupar el ancho completo con su fondo propio. */}
@@ -75,7 +92,7 @@ export default function App() {
               </div>
 
               <ProductList
-                onSelect={setProductoSeleccionado}
+                onSelect={seleccionarProducto}
                 onAddToCart={agregarAlCarrito}
               />
             </section>
@@ -159,7 +176,7 @@ export default function App() {
           <div className="contenedor">
             <ProductDetail
               id={productoSeleccionado}
-              onBack={() => setProductoSeleccionado(null)}
+              onBack={() => volverAlCatalogo("coleccion")}
               onAddToCart={agregarAlCarrito}
             />
           </div>
